@@ -5,11 +5,10 @@
 
 import os
 import sys
-
 # 判断是否为源码文件
 def isCodeFile(filePath):
 
-    if filePath.endswith(".h") | filePath.endswith(".m") | filePath.endswith(".swift"):
+    if filePath.endswith(".txt"):
         return True
     else:
         return False
