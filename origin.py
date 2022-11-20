@@ -1,7 +1,3 @@
-#!/usr/bin/python3
-# -*- coding: UTF-8 -*-
-# 文件名：Rename.py
-# 创建者：walker
 
 import os
 import sys

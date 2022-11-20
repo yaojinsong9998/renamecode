@@ -1,2 +1,40 @@
+执行顺序:rename.py -> prestart.py -> start.py
+输入:要改的文件的目录名
+
+先执行 rename.py 改名 将文件名后缀包含AjaxAction 以及 Action 的改成后缀为Controller
+
+再执行 prestart.py 预处理 需要将以下部分删除:
+private static final long serialVersionUID = -1895422056734170612L;
+private static final Logger LOGGER = Logger.getLogger(AccountRFMModelAjaxAction.class);
+protected void ajaxExecute() public int getCode() public Map<String, Object> getMsg()等重写的方法
+public String getAccountid()
+public void setAccountid(String accountid)
+对于内部类的get set方法不删除
+
+最后执行 start.py 处理 需要执行以下操作
+在类名上面增加注解 (url暂时不确定)
+更改类名以及继承名
+对于符合以下要求的函数进行如下处理：
+# public String queryTrendData() throws Exception {
+# public String queryBuDimInfo() {
+增加Get注解以及Url（先统一加成get post再改)
+返回值改成Object
+增加路径参数
+增加code msg result
+替换return
+
+
 出现的问题:
-1.当函数名中包含成员变量名时，会出现Bug
+1.当函数名中包含成员变量名时，会出现Bug --已解决 -从函数名的下一行开始搜索
+2.内部类get set方法 --已解决
+3.成员变量有初值的如何解决 --未解决 (处理成本高，手动解决)
+
+运行前注意事项:
+原文件 和 处理后的文件都需要格式化处理
+调研成员变量的数据类型补全到filter中
+
+运行后注意事项：
+路径参数可能会有冗余 （搜索时部分匹配） 手动删除
+处理时将初值忽略 需要手动加
+download函数需要手动修改
+http rquest手动加
